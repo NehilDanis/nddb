@@ -12,3 +12,23 @@ target_include_directories(
         $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
     PRIVATE ${CMAKE_SOURCE_DIR}/src/include
 )
+
+include(GNUInstallDirs)
+install(TARGETS libnddb
+        EXPORT nddb-targets
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+        INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+install(
+    DIRECTORY ${PROJECT_SOURCE_DIR}/include/
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+
+install(
+    EXPORT nddb-targets
+    FILE nddb-config.cmake
+    NAMESPACE nddb::
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/nddb
+)
