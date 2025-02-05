@@ -24,3 +24,11 @@ To run the command line too use the following command:
 ```shell
 ./build/tools/nddb
 ```
+
+### How to run tests
+
+Unless you specifically set the **BUILD_TESTING** flag to off, the tests will be generated and you can then run it via the following command:
+
+```shell
+./build/tests/tests
+```
