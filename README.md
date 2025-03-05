@@ -19,7 +19,7 @@ cmake --build build -j4
 ```
 
 ## Run
-To run the command line too use the following command:
+To run the command line, use the following command:
 
 ```shell
 ./build/tools/nddb
