@@ -9,6 +9,8 @@ pkg_check_modules(libedit REQUIRED IMPORTED_TARGET libedit)
 
 include(CTest)
 
+find_package(tl-expected REQUIRED)
+
 add_subdirectory("src")
 add_subdirectory("tools")
 
