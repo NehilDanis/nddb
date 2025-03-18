@@ -1,6 +1,10 @@
 #include <libnddb/libnddb.hpp>
 
 #include <sys/ptrace.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
 #include <iostream>
 #include <string_view>
 #include <tl/expected.hpp>
@@ -38,7 +42,18 @@ namespace {
         }
         // if the user provided a program name to launch
         else {
-
+            const char* program_path = argv[1];
+            if((pid = fork()) < 0) {
+                return make_error("Fork failed");
+            }
+            else if(pid == 0) { // in the child process
+                if(ptrace(PTRACE_TRACEME, /*pid=*/0, /*addr=*/nullptr, /*data=*/nullptr) < 0) {
+                    return make_error("Tracing the child process failed.");
+                }
+                if(execlp(program_path, program_path, nullptr) == -1) {
+                    return make_error("Exec failed.");
+                }
+            }
         }
 
         return pid;
@@ -52,5 +67,11 @@ int main(int argc, const char** argv) {
     }
 
     pid_t pid = expect(attach(argc, argv));
-  
+    
+    int wait_status;
+    int wait_options = 0;
+
+    if(waitpid(pid, &wait_status, wait_options) < 0) {
+        std::perror("waitpid failed.");
+    }
 }
