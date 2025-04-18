@@ -38,7 +38,7 @@ namespace nddb {
             // Error: attach failed
         }
 
-        std::unique_ptr<process> proc {new process(pid, /*terminate_on_end*/ true)};
+        std::unique_ptr<process> proc {new process(pid, /*terminate_on_end*/ false)};
 
         proc->wait_on_signal();
         return proc;
