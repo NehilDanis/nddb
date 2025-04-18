@@ -1,5 +1,3 @@
-#include <libnddb/libnddb.hpp>
-
 // libedit and printing command line related
 #include <editline/readline.h>
 

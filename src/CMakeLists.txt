@@ -1,4 +1,4 @@
-add_library(libnddb libnddb.cpp)
+add_library(libnddb process.cpp)
 add_library(nddb::libnddb ALIAS libnddb)
 
 set_target_properties(libnddb PROPERTIES OUTPUT_NAME nddb)
