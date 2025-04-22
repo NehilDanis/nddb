@@ -28,7 +28,7 @@ namespace nddb {
 
             process_state state() const { return _state;};
 
-            void resume();
+            void resume() {};
             pid_t get_pid() const { return _pid;}
         private:
             process(pid_t pid, bool terminate_on_end) : _pid(pid), _terminate_on_end(terminate_on_end){};
